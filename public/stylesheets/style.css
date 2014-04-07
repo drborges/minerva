@@ -1,0 +1,99 @@
+body {
+  background-color: #eee;
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.container {
+  position: absolute;
+  right:0px;
+  left: 0px;
+  width: 500px;
+}
+
+.nav h1 {
+  font-family: 'Butterfly Kids', cursive;
+  font-size: 40px;
+}
+
+.composer {
+  width: 500px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.composer input {
+  border-radius: 2px;
+}
+
+.feedback {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.feedback .info .fa-chevron-right {
+  color: #898f9c;
+  padding: 5px;
+}
+
+.feedback .info .date {
+  display: inline-block;
+  color: #898f9c;
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.feedback .sender,
+.feedback .receiver {
+  display: inline-block;
+  height: 25;
+  width: 25px;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  box-shadow: 0px 0px 2px #888;
+}
+
+.feedback .content {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  position: relative;
+  background-color: white;
+  min-height: 60px;
+  min-width: 500px;
+
+  box-shadow: 0px 0px 2px #ccc;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.feedback .content .fa-quote-left,
+.feedback .content .fa-quote-right {
+  vertical-align: top;
+  color: #bbb;
+  font-size: 8px;
+}
+
+.feedback .tags {
+  position: absolute;
+  right: -28px;
+  top: 85px;
+  z-index: -1;
+}
+
+.feedback .tag {
+  color: #fff;
+  min-width: 25px;
+  text-align: center;
+  font-size: 8px;
+  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background-color: #428bca;
+}

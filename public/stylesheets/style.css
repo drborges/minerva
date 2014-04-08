@@ -8,42 +8,49 @@ a {
 }
 
 .container {
-  position: absolute;
   right:0px;
   left: 0px;
-  width: 500px;
+  padding: 0;
+  width: 70%;
+  min-width: 350px;
+  max-width: 630px;
+  position: absolute;
 }
 
-.nav h1 {
+.nav .title {
   font-family: 'Butterfly Kids', cursive;
   font-size: 40px;
+  padding: 10px;
+
+  font-weight: bold;
 }
 
 .composer {
-  width: 500px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 10px;
 }
 
-.composer input {
+.composer .form-control {
   border-radius: 2px;
 }
 
 .feedback {
   position: relative;
+  padding: 10px;
   padding-bottom: 20px;
 }
 
 .feedback .info .fa-chevron-right {
-  color: #898f9c;
-  padding: 5px;
+  padding: 8px;
 }
 
-.feedback .info .date {
+.feedback .info .extra {
+  padding-left: 5px;
+}
+
+.feedback .info {
   display: inline-block;
   color: #898f9c;
   font-size: 10px;
-  padding-left: 5px;
 }
 
 .feedback .sender,
@@ -57,18 +64,15 @@ a {
 }
 
 .feedback .content {
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px;
   position: relative;
-  background-color: white;
+  padding: 10px;
   min-height: 60px;
-  min-width: 500px;
-
+  vertical-align: top;
+  background-color: white;
   box-shadow: 0px 0px 3px #ccc;
+  border-top-right-radius: 2px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
 }
 
 .feedback .content .fa-quote-left,
@@ -80,8 +84,8 @@ a {
 
 .feedback .tags {
   position: absolute;
-  right: -28px;
-  top: 94px;
+  right: 5px;
+  bottom: -13px;
   z-index: -1;
 }
 
@@ -91,10 +95,15 @@ a {
   text-align: center;
   font-size: 8px;
   margin-left: 3px;
-  padding: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   background-color: #428bca;
+}
+
+.separator {
+  vertical-align: super;
+  font-size: 10px;
 }

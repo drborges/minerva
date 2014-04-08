@@ -3,23 +3,27 @@
   <div class="feedback" ng-repeat="feedback in timeline.feedbacks">
 
     <div class="info">
-      <img src="/images/{{feedback.sender.id}}.jpg" class="sender" />
+      <img ng-src="/images/{{feedback.sender.id}}.jpg" class="sender" />
       <i class="fa fa-chevron-right"></i>
-      <img src="/images/{{feedback.receiver.id}}.jpg" class="receiver" />
-      <div class="date">
-        <span>{{feedback.created_at}}</span>
-        <i class="fa fa-trophy type"></i>
-      </div>
+      <img ng-src="/images/{{feedback.receiver.id}}.jpg" class="receiver" />
+
+      <span class="extra">{{feedback.created_at | date: 'shortTime'}}</span>
+      <span class="separator extra">.</span>
+      <span class="extra"><i class="fa fa-trophy type"></i></span>
+      <span class="separator extra">.</span>
+      <span class="extra"><i class="fa fa-globe visibility"></i></span>
+      <span class="separator extra">.</span>
+      <span class="extra"><i class="fa fa-location-arrow location"></i></span>
     </div>
 
     <div class="content">
       <i class="fa fa-quote-left"></i>
       <span>{{feedback.content}}</span>
       <i class="fa fa-quote-right"></i>
-    </div>
 
-    <div class="tags">
-      <span class="tag" ng-repeat="tag in feedback.tags">#{{tag}}</span>
+      <div class="tags">
+        <span class="tag" ng-repeat="tag in feedback.tags">#{{tag}}</span>
+      </div>
     </div>
   </div>
 

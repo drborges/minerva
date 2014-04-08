@@ -1,4 +1,5 @@
 angular.module('minerva', [
   'ui.router',
-  'minerva.auth',
+  'minerva.timeline',
+  'minerva.auth'
 ]);

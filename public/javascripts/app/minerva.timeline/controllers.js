@@ -18,11 +18,11 @@ angular.module('minerva.timeline', [])
         tags: ["scala", "goal"]
       },
       {
-        sender: {
+        receiver: {
           id: "dborges",
           name: "Diego Borges"
         },
-        receiver: {
+        sender: {
           id: "drborges",
           name: "Diego da Rocha Borges"
         },

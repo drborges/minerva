@@ -4,7 +4,8 @@ angular.module('minerva')
       url: '',
       views: {
         'timeline': { templateUrl: 'templates/timeline.html' },
-        'composer': { templateUrl: 'templates/composer.html' }
+        'composer': { templateUrl: 'templates/composer.html' },
+        'summary': { templateUrl: 'templates/summary.html' }
       }
     });
   });

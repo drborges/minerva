@@ -9,7 +9,7 @@
 
       <span class="extra">{{feedback.created_at | date: 'shortTime'}}</span>
       <span class="separator extra">.</span>
-      <span class="extra"><i class="fa fa-trophy type"></i></span>
+      <span class="extra"><i class="type fa {{feedback.type | feedbackTypeClass}}"></i></span>
       <span class="separator extra">.</span>
       <span class="extra"><i class="fa fa-globe visibility"></i></span>
       <span class="separator extra">.</span>

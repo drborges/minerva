@@ -11,13 +11,14 @@ a {
   right:0px;
   left: 0px;
   padding: 0;
-  width: 70%;
+  width: 95%;
   min-width: 350px;
   max-width: 630px;
   position: absolute;
 }
 
 .nav .title {
+  margin-left: 5px;
   font-family: 'Butterfly Kids', cursive;
   font-size: 40px;
   font-weight: bold;
@@ -25,10 +26,8 @@ a {
 
 .summary .data {
   position: relative;
-  margin-top: 10px;
   font-weight: bold;
   color: #898f9c;
-  font-size: 16px;
   z-index: -1;
   height: 30px;
 }
@@ -36,49 +35,54 @@ a {
 .summary .data .accomplishments,
 .summary .data .shouts,
 .summary .data .back-taps,
+.summary .data .improvements,
 .summary .data .screw-ups {
   position: relative;
   top: 50px;
-  text-align: center;
-  float: left;
-  height: 100%;
 
   transition: top 0.3s ease-in-out;
   -webkit-transition: top 0.3s ease-in-out;
   -moz-transition: top 0.3s ease-in-out;
 }
 
-.summary:hover .accomplishments,
-.summary:hover .shouts,
-.summary:hover .back-taps,
-.summary:hover .screw-ups {
-  top: 8px;
+.summary:hover .data .accomplishments,
+.summary:hover .data .shouts,
+.summary:hover .data .back-taps,
+.summary:hover .data .improvements,
+.summary:hover .data .screw-ups {
+  top: 10px;
 }
 
-.summary .data .accomplishments {
+.summary .accomplishments {
   width: 40%;
 }
 
-.summary .data .shouts {
+.summary .shouts {
   width: 20%;
 }
 
-.summary .data .back-taps {
+.summary .back-taps {
   width: 30%;
 }
 
-.summary .data .screw-ups {
-  width: 10%;
+.summary .improvements {
+  width: 5%;
+}
+
+.summary .screw-ups {
+  width: 5%;
 }
 
 .summary .bar {
   height: 4px;
 }
 
-.summary .bar .accomplishments,
-.summary .bar .shouts,
-.summary .bar .back-taps,
-.summary .bar .screw-ups {
+.summary .accomplishments,
+.summary .shouts,
+.summary .back-taps,
+.summary .improvements,
+.summary .screw-ups {
+  text-align: center;
   float: left;
   height: 100%;
 }
@@ -86,27 +90,27 @@ a {
 .summary .bar .accomplishments {
   border-top-left-radius: 2px;
   background-color: #1d9d74;
-  width: 40%;
 }
 
 .summary .bar .shouts {
   background-color: #2fc2ef;
-  width: 20%;
 }
 
 .summary .bar .back-taps {
-  background-color: #7dd3b0;
-  width: 30%;
+  background-color: #898f9c;
+}
+
+.summary .bar .improvements {
+  background-color: #ff5;
 }
 
 .summary .bar .screw-ups {
   border-top-right-radius: 2px;
   background-color: #f66;
-  width: 10%;
 }
 
 .composer {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .composer .form-control {
@@ -114,11 +118,15 @@ a {
   border-top-right-radius: 0px;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+
   border: 1px solid #ddd;
-  border-top: none;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+
   vertical-align: text-top;
   height: 35px;
   resize: none;
+  font-size: 12px;
 
   transition: height 0.5s;
   -webkit-transition: height 0.5s;
@@ -127,6 +135,27 @@ a {
 
 .composer .form-control:focus {
   height: 120px;
+  box-shadow: 0px 0px 8px #bbb;
+}
+
+.composer .form-control:focus ~ .info {
+  opacity: 1;
+
+  transition: opacity 0.5s ease-in;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+
+  animation-delay: 1s;
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 1s;
+}
+
+.composer .info {
+  opacity: 0;
+  margin: 5px;
+  color: #898f9c;
+  font-size: 10px;
+  text-align: right;
 }
 
 .feedback {
@@ -138,8 +167,32 @@ a {
   padding: 8px;
 }
 
+.feedback .info .extra .fa-trophy {
+  color: #1d9d74;
+}
+
+.feedback .info .extra .fa-bullhorn {
+  color: #2fc2ef;
+}
+
+.feedback .info .extra .fa-star-o {
+  color: #898f9c;
+}
+
+.feedback .info .extra .fa-road {
+  color: #ff5;
+}
+
+.feedback .info .extra .fa-fire {
+  color: #f66;
+}
+
 .feedback .info .extra {
-  margin-left: 5px;
+  margin-left: 15px;
+}
+
+.feedback .info .extra .type {
+  text-shadow: 0px 0px 1px #aaa;
 }
 
 .feedback .info {
@@ -198,7 +251,7 @@ a {
   background-color: #428bca;
 }
 
-.separator {
+.feedback .info .separator {
   vertical-align: super;
   font-size: 10px;
 }

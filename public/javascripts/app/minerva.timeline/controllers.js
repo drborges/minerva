@@ -11,6 +11,16 @@ angular.module('minerva.timeline', [])
     };
   })
 
+  .filter('charactersLeft', function () {
+    return function (input, maxCharacters) {
+      var charactersLeftCount = !input ? maxCharacters : maxCharacters - input.length;
+
+      return charactersLeftCount === 1 ?
+        charactersLeftCount + " character left" :
+        charactersLeftCount + " characters left";
+    };
+  })
+
   .controller('TimelineController', function () {
     this.feedbacks = [
       {

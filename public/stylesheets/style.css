@@ -24,6 +24,13 @@ a {
   font-weight: bold;
 }
 
+/* fixes title styling in firefox */
+@-moz-document url-prefix() {
+  .nav .title {
+     font-weight: normal;
+  }
+}
+
 .summary .data {
   position: relative;
   font-weight: bold;

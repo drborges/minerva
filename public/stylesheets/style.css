@@ -21,14 +21,6 @@ a {
   margin-left: 5px;
   font-family: 'Butterfly Kids', cursive;
   font-size: 40px;
-  font-weight: bold;
-}
-
-/* fixes title styling in firefox */
-@-moz-document url-prefix() {
-  .nav .title {
-     font-weight: normal;
-  }
 }
 
 .summary .data {
@@ -37,6 +29,7 @@ a {
   color: #898f9c;
   z-index: -1;
   height: 30px;
+  text-shadow: 0px 1px 0px #fff;
 }
 
 .summary .data .achievements,
@@ -47,9 +40,9 @@ a {
   position: relative;
   top: 50px;
 
-  transition: top 0.3s ease-in-out;
-  -webkit-transition: top 0.3s ease-in-out;
-  -moz-transition: top 0.3s ease-in-out;
+  transition: top 0.2s ease-in-out;
+  -webkit-transition: top 0.2s ease-in-out;
+  -moz-transition: top 0.2s ease-in-out;
 }
 
 .summary:hover .data .achievements,
@@ -57,7 +50,7 @@ a {
 .summary:hover .data .back-taps,
 .summary:hover .data .improvements,
 .summary:hover .data .screw-ups {
-  top: 10px;
+  top: 12px;
 }
 
 .summary .bar {
@@ -76,11 +69,11 @@ a {
 
 .summary .bar .achievements {
   border-top-left-radius: 2px;
-  background-color: #1d9d74;
+  background-color: #69bf13;
 }
 
 .summary .bar .shouts {
-  background-color: #2fc2ef;
+  background-color: #00aeef;
 }
 
 .summary .bar .back-taps {
@@ -88,12 +81,12 @@ a {
 }
 
 .summary .bar .improvements {
-  background-color: #ff5;
+  background-color: #ddaa11;
 }
 
 .summary .bar .screw-ups {
   border-top-right-radius: 2px;
-  background-color: #f66;
+  background-color: #ff4444;
 }
 
 .composer {
@@ -147,34 +140,36 @@ a {
 
 .feedback .info .fa-chevron-right {
   padding: 8px;
+  text-shadow: 0px 1px 0px #fff;
 }
 
 .feedback .info .extra .fa-trophy {
-  color: #1d9d74;
+  color: #69bf13;
 }
 
 .feedback .info .extra .fa-bullhorn {
-  color: #2fc2ef;
+  color: #00aeef;
 }
 
 .feedback .info .extra .fa-star-o {
   color: #898f9c;
 }
 
-.feedback .info .extra .fa-road {
-  color: #ff5;
+.feedback .info .extra .fa-exclamation-triangle {
+  color: #ddaa11;
 }
 
 .feedback .info .extra .fa-fire {
-  color: #f66;
+  color: #ff4444;
+}
+
+.feedback .info .extra .location {
+  opacity: 0.3;
 }
 
 .feedback .info .extra {
   margin-left: 15px;
-}
-
-.feedback .info .extra .type {
-  text-shadow: 0px 0px 1px #aaa;
+  text-shadow: 0px 1px 0px #fff;
 }
 
 .feedback .info {

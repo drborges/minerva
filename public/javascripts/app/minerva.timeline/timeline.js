@@ -16,7 +16,7 @@ angular.module('minerva.timeline', [])
         case 'achievement': return 'fa-trophy';
         case 'shout': return 'fa-bullhorn';
         case 'back-tap': return 'fa-star';
-        case 'improvement': return 'fa-road';
+        case 'improvement': return 'fa-exclamation-triangle';
         case 'screw-up': return 'fa-fire';
       }
     };
@@ -38,7 +38,7 @@ angular.module('minerva.timeline', [])
         type: "achievement",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["achievement", "scala"]
       },
       {
         receiver: {
@@ -54,7 +54,7 @@ angular.module('minerva.timeline', [])
         type: "shout",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["shout", "devOps", "CD", "chef"]
       },
       {
         sender: {
@@ -70,7 +70,7 @@ angular.module('minerva.timeline', [])
         type: "improvement",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["improvement", "javascript"]
       },
       {
         sender: {
@@ -86,7 +86,7 @@ angular.module('minerva.timeline', [])
         type: "screw-up",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["screw-up"]
       },
       {
         sender: {
@@ -102,7 +102,7 @@ angular.module('minerva.timeline', [])
         type: "back-tap",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["back-tap", "scala", "goal"]
       },
       {
         sender: {
@@ -118,7 +118,7 @@ angular.module('minerva.timeline', [])
         type: "achievement",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["achievement", "scala", "goal"]
       },
       {
         receiver: {
@@ -134,7 +134,7 @@ angular.module('minerva.timeline', [])
         type: "shout",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["shout", "scala", "goal"]
       },
       {
         sender: {
@@ -150,7 +150,7 @@ angular.module('minerva.timeline', [])
         type: "improvement",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["improvement", "scala", "goal"]
       },
       {
         sender: {
@@ -166,7 +166,7 @@ angular.module('minerva.timeline', [])
         type: "screw-up",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["screw-up", "scala", "goal"]
       },
       {
         sender: {
@@ -182,7 +182,7 @@ angular.module('minerva.timeline', [])
         type: "back-tap",
         visibility: "public",
         location: { latiture: 40.7597805, longitude: -73.9628991 },
-        tags: ["scala", "goal"]
+        tags: ["back-tap", "scala", "goal"]
       }
     ];
   });

@@ -30,24 +30,24 @@ angular.module('minerva.summary', [])
     this.loggedInUser = {
       summary: {
         achievements: {
-          count: 50,
-          rate: '50%'
+          count: 20,
+          rate: '20%'
         },
         shouts: {
-          count: 15,
-          rate: '15%'
+          count: 20,
+          rate: '20%'
         },
         backTaps: {
-          count: 25,
-          rate: '25%'
+          count: 20,
+          rate: '20%'
         },
         improvements: {
-          count: 8,
-          rate: '8%'
+          count: 20,
+          rate: '20%'
         },
         screwUps: {
-          count: 2,
-          rate: '2%'
+          count: 20,
+          rate: '20%'
         }
       }
     };

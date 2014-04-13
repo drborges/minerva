@@ -1,0 +1,11 @@
+<div ng-controller="SummaryController as controller">
+  <summary for="controller.loggedInUser.summary"></summary>
+</div>
+
+<div>
+  <composer maxlength="500" ng-model="composer"></composer>
+</div>
+
+<div ng-controller="TimelineController as timeline">
+  <timeline activity="timeline.feedbacks"></timeline>
+</div>

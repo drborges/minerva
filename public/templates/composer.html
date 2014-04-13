@@ -1,8 +1,8 @@
 <div class="composer">
   <textarea
-    maxlength="500"
-    ng-model="composer"
+    maxlength="{{maxlength}}"
+    ng-model="model"
     class="form-control"
     placeholder="Feedback to a @user with #tags"></textarea>
-  <div class="info">{{ composer | charactersLeft: 500 }}</div>
+  <div class="info">{{ model | charactersLeft: maxlength }}</div>
 </div>

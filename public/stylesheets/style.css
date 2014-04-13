@@ -39,7 +39,7 @@ a {
   height: 30px;
 }
 
-.summary .data .accomplishments,
+.summary .data .achievements,
 .summary .data .shouts,
 .summary .data .back-taps,
 .summary .data .improvements,
@@ -52,7 +52,7 @@ a {
   -moz-transition: top 0.3s ease-in-out;
 }
 
-.summary:hover .data .accomplishments,
+.summary:hover .data .achievements,
 .summary:hover .data .shouts,
 .summary:hover .data .back-taps,
 .summary:hover .data .improvements,
@@ -60,31 +60,11 @@ a {
   top: 10px;
 }
 
-.summary .accomplishments {
-  width: 40%;
-}
-
-.summary .shouts {
-  width: 20%;
-}
-
-.summary .back-taps {
-  width: 30%;
-}
-
-.summary .improvements {
-  width: 5%;
-}
-
-.summary .screw-ups {
-  width: 5%;
-}
-
 .summary .bar {
   height: 4px;
 }
 
-.summary .accomplishments,
+.summary .achievements,
 .summary .shouts,
 .summary .back-taps,
 .summary .improvements,
@@ -94,7 +74,7 @@ a {
   height: 100%;
 }
 
-.summary .bar .accomplishments {
+.summary .bar .achievements {
   border-top-left-radius: 2px;
   background-color: #1d9d74;
 }
@@ -134,27 +114,22 @@ a {
   border: none;
   box-shadow: 0px 0px 3px #ccc;
 
-  transition: height 0.5s;
-  -webkit-transition: height 0.5s;
-  -moz-transition: height 0.5s;
+  transition: height 0.2s;
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
 }
 
 .composer .form-control:focus {
   height: 120px;
-  border: none;
-  box-shadow: 0px 0px 15px #bbb;
+  box-shadow: 0px 0px 20px #999;
 }
 
 .composer .form-control:focus ~ .info {
   opacity: 1;
 
-  transition: opacity 0.5s ease-in;
-  -webkit-transition: opacity 0.5s ease-in;
-  -moz-transition: opacity 0.5s ease-in;
-
-  animation-delay: 1s;
-  -webkit-animation-delay: 2s;
-  -moz-animation-delay: 1s;
+  transition: opacity 0.3s ease-in;
+  -webkit-transition: opacity 0.3s ease-in;
+  -moz-transition: opacity 0.3s ease-in;
 }
 
 .composer .info {

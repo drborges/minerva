@@ -8,25 +8,28 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/font-awesome.css">
 
-  <script type="text/javascript" src="/javascripts/vendor/highlightjs/highlight.pack.js"></script>
+  <script type="text/javascript" src="/javascripts/vendor/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/javascripts/vendor/angular/angular.min.js"></script>
   <script type="text/javascript" src="/javascripts/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script type="text/javascript" src="/javascripts/vendor/angular-resource/angular-resource.min.js"></script>
   <script type="text/javascript" src="/javascripts/app/config.js"></script>
   <script type="text/javascript" src="/javascripts/app/routes.js"></script>
   <script type="text/javascript" src="/javascripts/app/minerva.auth/auth.js"></script>
-  <script type="text/javascript" src="/javascripts/app/minerva.timeline/controllers.js"></script>
+  <script type="text/javascript" src="/javascripts/app/minerva.timeline/timeline.js"></script>
+  <script type="text/javascript" src="/javascripts/app/minerva.summary/summary.js"></script>
+  <script type="text/javascript" src="/javascripts/app/minerva.composer/composer.js"></script>
 </head>
 
 <body ng-app="minerva">
 
   <div class="container">
+
     <div class="nav">
       <h1 class="title">Minerva</h1>
     </div>
-    <div ui-view="summary"></div>
-    <div ui-view="composer"></div>
-    <div ui-view="timeline"></div>
+
+    <div ui-view="home"></div>
   </div>
+
 </body>
 </html>

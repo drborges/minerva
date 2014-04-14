@@ -1,7 +1,8 @@
-var gulp = require('gulp'),
-    plumber = require('gulp-plumber'),
-    watch = require('gulp-watch'),
-    shell = require('gulp-shell');
+var gulp = require('gulp')
+  , plumber = require('gulp-plumber')
+  , nodemon = require('gulp-nodemon')
+  , watch = require('gulp-watch')
+  , shell = require('gulp-shell');
 
 var paths = {
   specRunner: 'spec/spec.runner.html',
@@ -24,3 +25,10 @@ gulp.task('watch', function () {
     .pipe(plumber())
     .pipe(mochaPhantomJS);
 });
+
+gulp.task('develop', function () {
+  nodemon({ script: 'app.js', ext: 'html js', ignore: [] })
+    .on('restart', function () {
+      console.log('restarted!')
+    })
+})

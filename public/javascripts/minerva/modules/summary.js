@@ -42,12 +42,12 @@ angular.module('minerva.summary', [])
           rate: '20%'
         },
         improvements: {
-          count: 20,
-          rate: '20%'
+          count: 38,
+          rate: '38%'
         },
         screwUps: {
-          count: 20,
-          rate: '20%'
+          count: 2,
+          rate: '2%'
         }
       }
     };

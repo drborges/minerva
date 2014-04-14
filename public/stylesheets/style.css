@@ -12,7 +12,6 @@ a {
   left: 0px;
   padding: 0;
   width: 95%;
-  min-width: 350px;
   max-width: 630px;
   position: absolute;
 }
@@ -131,6 +130,7 @@ a {
   color: #898f9c;
   font-size: 10px;
   text-align: right;
+  text-shadow: 0px 1px 0px #fff;
 }
 
 .feedback {

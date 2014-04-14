@@ -23,6 +23,10 @@ angular.module('minerva.timeline', [])
   })
 
   .controller('TimelineController', function () {
+    this.post = function (feedback) {
+      this.feedbacks.unshift(feedback);
+    };
+
     this.feedbacks = [
       {
         sender: {

@@ -1,28 +1,6 @@
-angular.module('minerva.timeline', [])
+angular.module('minerva.timeline')
 
-  .directive('timeline', function () {
-    return {
-      scope: {
-        activity: '=activity'
-      },
-      restrict: 'E',
-      templateUrl: 'templates/timeline.html'
-    };
-  })
-
-  .filter('feedbackTypeClass', function () {
-    return function (feedbackType) {
-      switch (feedbackType) {
-        case 'achievement': return 'fa-trophy';
-        case 'shout': return 'fa-bullhorn';
-        case 'back-tap': return 'fa-star';
-        case 'improvement': return 'fa-exclamation-triangle';
-        case 'screw-up': return 'fa-fire';
-      }
-    };
-  })
-
-  .controller('TimelineController', function () {
+  .controller('TimelineCtrl', function () {
     this.post = function (feedback) {
       this.feedbacks.unshift(feedback);
     };

@@ -2,3 +2,5 @@ node_modules
 bower_components
 vendor
 *.log
+public/javascripts/dist
+spec/specs.js

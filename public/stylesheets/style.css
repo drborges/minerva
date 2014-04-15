@@ -80,7 +80,7 @@ a {
 }
 
 .summary .bar .improvements {
-  background-color: #ddaa11;
+  background-color: #ddaa44;
 }
 
 .summary .bar .screw-ups {
@@ -156,7 +156,7 @@ a {
 }
 
 .feedback .info .extra .fa-exclamation-triangle {
-  color: #ddaa11;
+  color: #ddaa44;
 }
 
 .feedback .info .extra .fa-fire {

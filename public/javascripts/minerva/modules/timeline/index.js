@@ -1,0 +1,1 @@
+angular.module('minerva.timeline', []);

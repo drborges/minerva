@@ -22,10 +22,12 @@
   <script type="text/javascript" src="../public/javascripts/vendor/angular/angular.js"></script>
   <script type="text/javascript" src="../public/javascripts/vendor/angular-mocks/angular-mocks.js"></script>
 
-  <script type="text/javascript" src="../public/javascripts/minerva/modules/composer.js"></script>
+  <!-- bundled app -->
+  <script type="text/javascript" src="../public/javascripts/dist/app.js"></script>
 
-  <script type="text/javascript" src="composer/filter.charactersLeft.spec.js"></script>
-  <script type="text/javascript" src="composer/directive.maxCharacters.spec.js"></script>
+  <!-- bundled tests -->
+  <script type="text/javascript" src="specs.js"></script>
+
   <script type="text/javascript">
     if (window.mochaPhantomJS) {
         mochaPhantomJS.run();

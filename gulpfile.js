@@ -32,8 +32,21 @@ var runTests = function (config) {
     .pipe(shell('mocha-phantomjs -R dot spec/spec.runner.html'))
 }
 
-gulp.task('default', ['server', 'concat'])
-gulp.task('concat', ['concat-app', 'concat-specs'])
+var concatFiles = function (config) {
+  return gulp.src(config.src)
+    .pipe(config.watch ? watch({ glob: config.src }) : gutil.noop())
+    .pipe(plumber())
+    .pipe(config.watch ? autoConcat(path.basename(config.dest)) : concat(path.basename(config.dest)))
+    .pipe(gulp.dest(path.dirname(config.dest)))
+}
+
+/*
+ * Attention: auto-* tasks are not sync tasks, which means they
+ * should never return streams/promises, otherwise tasks using
+ * them as dependencies will block.
+ */
+
+gulp.task('default', ['server', 'auto-concat-app'])
 gulp.task('dist', ['min'])
 
 gulp.task('server', function () {
@@ -47,24 +60,26 @@ gulp.task('spec', function () {
   return runTests({ autotest: false })
 })
 
-gulp.task('auto-test', ['concat'], function () {
+gulp.task('auto-test', ['auto-concat'], function () {
   runTests({ autotest: true })
 })
 
+gulp.task('auto-concat', ['auto-concat-app', 'auto-concat-specs'])
+
+gulp.task('auto-concat-app', function() {
+  concatFiles({ watch: true, src: files.app, dest: files.appBundle })
+})
+
 gulp.task('concat-app', function() {
-  return gulp.src(files.app)
-    //.pipe(watch({ glob: files.app }))
-    //.pipe(plumber())
-    .pipe(concat(path.basename(files.appBundle)))
-    .pipe(gulp.dest(path.dirname(files.appBundle)))
+  return concatFiles({ watch: false, src: files.app, dest: files.appBundle })
+})
+
+gulp.task('auto-concat-specs', function() {
+  concatFiles({ watch: true, src: files.specs, dest: files.specBundle })
 })
 
 gulp.task('concat-specs', function() {
-  return gulp.src(files.specs)
-    //.pipe(watch({ glob: files.specs }))
-    //.pipe(plumber())
-    .pipe(concat(path.basename(files.specBundle)))
-    .pipe(gulp.dest(path.dirname(files.specBundle)))
+  return concatFiles({ watch: false, src: files.specs, dest: files.specBundle })
 })
 
 gulp.task('pre-min', ['concat-app'], function () {

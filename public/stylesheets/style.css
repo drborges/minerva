@@ -20,6 +20,7 @@ a {
   margin-left: 5px;
   font-family: 'Butterfly Kids', cursive;
   font-size: 40px;
+  text-shadow: 0px 1px 0px #fff;
 }
 
 .summary .data {

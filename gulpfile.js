@@ -1,16 +1,23 @@
+var path = require('path')
+
 var gulp = require('gulp')
   , plumber = require('gulp-plumber')
   , nodemon = require('gulp-nodemon')
   , watch = require('gulp-watch')
   , shell = require('gulp-shell')
-  , concat = require('gulp-continuous-concat')
+  , autoConcat = require('gulp-continuous-concat')
+  , concat = require('gulp-concat')
   , gutil = require('gulp-util')
+  , ngmin = require('gulp-ngmin')
+  , uglify = require('gulp-uglify')
+  , rename = require('gulp-rename')
 
 var files = {
-  appBundle: 'public/javascripts/dist/app.js',
   specBundle: 'spec/specs.js',
+  appBundle: 'public/javascripts/dist/app.js',
+  distBundle: 'public/javascripts/dist/app.min.js',
   specs: ['spec/**/*.js', '!spec/specs.js'],
-  dist: [
+  app: [
     'public/javascripts/minerva/app.js',
     'public/javascripts/minerva/modules/**/index.js',
     'public/javascripts/minerva/routes.js',
@@ -27,6 +34,7 @@ var runTests = function (config) {
 
 gulp.task('default', ['server', 'concat'])
 gulp.task('concat', ['concat-app', 'concat-specs'])
+gulp.task('dist', ['min'])
 
 gulp.task('server', function () {
   nodemon({ script: 'app.js', ext: 'html js', ignore: [] })
@@ -36,7 +44,7 @@ gulp.task('server', function () {
 })
 
 gulp.task('spec', function () {
-  runTests({ autotest: false })
+  return runTests({ autotest: false })
 })
 
 gulp.task('auto-test', ['concat'], function () {
@@ -44,19 +52,34 @@ gulp.task('auto-test', ['concat'], function () {
 })
 
 gulp.task('concat-app', function() {
-  gulp.src(files.dist)
-    .pipe(watch({ glob: files.dist }))
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('public/javascripts/dist'))
+  return gulp.src(files.app)
+    //.pipe(watch({ glob: files.app }))
+    //.pipe(plumber())
+    .pipe(concat(path.basename(files.appBundle)))
+    .pipe(gulp.dest(path.dirname(files.appBundle)))
 })
 
 gulp.task('concat-specs', function() {
-  gulp.src(files.specs)
-    .pipe(watch({ glob: files.specs }))
-    .pipe(concat('specs.js'))
-    .pipe(gulp.dest('spec'))
+  return gulp.src(files.specs)
+    //.pipe(watch({ glob: files.specs }))
+    //.pipe(plumber())
+    .pipe(concat(path.basename(files.specBundle)))
+    .pipe(gulp.dest(path.dirname(files.specBundle)))
+})
+
+gulp.task('pre-min', ['concat-app'], function () {
+  return gulp.src(files.appBundle)
+    .pipe(ngmin())
+    .pipe(gulp.dest(path.dirname(files.distBundle)))
+})
+
+gulp.task('min', ['pre-min'], function () {
+  return gulp.src(files.appBundle)
+    .pipe(uglify())
+    .pipe(rename(path.basename(files.distBundle)))
+    .pipe(gulp.dest(path.dirname(files.distBundle)))
 })
 
 gulp.task('clean', function() {
-  gulp.src([ files.appBundle, files.specBundle ]).pipe(shell('rm -f <%= file.path %>'))
+  gulp.src([ files.appBundle, files.specBundle, path.dirname(files.distBundle) ]).pipe(shell('rm -rf <%= file.path %>'))
 })

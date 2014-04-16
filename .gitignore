@@ -3,4 +3,5 @@ bower_components
 vendor
 *.log
 public/javascripts/dist
+public/javascripts/app.js
 spec/specs.js

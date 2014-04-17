@@ -11,6 +11,8 @@ var gulp = require('gulp')
   , ngmin = require('gulp-ngmin')
   , uglify = require('gulp-uglify')
   , rename = require('gulp-rename')
+  , jshint = require('gulp-jshint')
+  , stylish = require('jshint-stylish')
 
 var files = {
   specBundle: 'spec/specs.js',
@@ -46,8 +48,10 @@ var concatFiles = function (config) {
  * them as dependencies will block.
  */
 
-gulp.task('default', ['server', 'auto-concat-app'])
 gulp.task('dist', ['min'])
+gulp.task('tdd', ['auto-test', 'auto-lint'])
+gulp.task('default', ['server', 'auto-concat-app'])
+gulp.task('auto-concat', ['auto-concat-app', 'auto-concat-specs'])
 
 gulp.task('server', function () {
   nodemon({ script: 'app.js', ext: 'html js', ignore: ['spec'] })
@@ -56,30 +60,38 @@ gulp.task('server', function () {
     })
 })
 
-gulp.task('spec', function () {
-  return runTests({ autotest: false })
-})
-
 gulp.task('auto-test', ['auto-concat'], function () {
   runTests({ autotest: true })
 })
 
-gulp.task('auto-concat', ['auto-concat-app', 'auto-concat-specs'])
-
 gulp.task('auto-concat-app', function() {
   concatFiles({ watch: true, src: files.app, dest: files.appBundle })
-})
-
-gulp.task('concat-app', function() {
-  return concatFiles({ watch: false, src: files.app, dest: files.appBundle })
 })
 
 gulp.task('auto-concat-specs', function() {
   concatFiles({ watch: true, src: files.specs, dest: files.specBundle })
 })
 
+gulp.task('auto-lint', function () {
+  gulp.watch(files.app, ['lint'])
+})
+
+gulp.task('spec', function () {
+  return runTests({ autotest: false })
+})
+
 gulp.task('concat-specs', function() {
   return concatFiles({ watch: false, src: files.specs, dest: files.specBundle })
+})
+
+gulp.task('concat-app', function() {
+  return concatFiles({ watch: false, src: files.app, dest: files.appBundle })
+})
+
+gulp.task('lint', function () {
+  return gulp.src(files.app)
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
 })
 
 gulp.task('pre-min', ['concat-app'], function () {

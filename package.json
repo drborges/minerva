@@ -36,6 +36,8 @@
     "gulp-connect": "~2.0.5",
     "gulp-uglify": "~0.2.1",
     "gulp-concat": "~2.2.0",
-    "gulp-rename": "~1.2.0"
+    "gulp-rename": "~1.2.0",
+    "gulp-jshint": "~1.5.3",
+    "jshint-stylish": "~0.1.5"
   }
 }

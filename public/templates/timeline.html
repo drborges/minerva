@@ -7,7 +7,7 @@
       <i class="fa fa-chevron-right"></i>
       <img ng-src="/images/{{feedback.receiver.id}}.jpg" class="receiver" />
 
-      <span class="extra">{{feedback.created_at | date: 'shortTime'}}</span>
+      <span class="extra">{{feedback.createdAt | date: 'shortTime'}}</span>
       <span class="separator extra">.</span>
       <span class="extra"><i class="type fa {{feedback.type | feedbackTypeClass}}"></i></span>
       <span class="separator extra">.</span>

@@ -6,7 +6,7 @@ angular.module('minerva.composer')
         maxCharacters: '=maxCharacters',
         model: '=ngModel'
       },
-      link: function (scope, element) {
+      link: function (scope) {
         scope.$watch('model', function (newValue, oldValue) {
           var maxCharactersReached = $filter('charactersLeft')(newValue, scope.maxCharacters) < 0;
 

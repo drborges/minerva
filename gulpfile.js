@@ -50,7 +50,7 @@ gulp.task('default', ['server', 'auto-concat-app'])
 gulp.task('dist', ['min'])
 
 gulp.task('server', function () {
-  nodemon({ script: 'app.js', ext: 'html js', ignore: [] })
+  nodemon({ script: 'app.js', ext: 'html js', ignore: ['spec'] })
     .on('restart', function () {
       console.log('restarted!')
     })

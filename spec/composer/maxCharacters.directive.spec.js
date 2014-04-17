@@ -1,40 +1,46 @@
 describe ('minerva.composer', function () {
-  beforeEach(module('minerva.composer'));
+  var $compile, $scope
+
+  beforeEach(module('minerva.composer'))
+  beforeEach(inject(function (_$compile_, $rootScope) {
+    $compile = _$compile_
+    $scope = $rootScope.$new()
+  }))
 
   describe('maxCharacters', function () {
-    var template = '<textarea max-characters="max" ng-model="model"></textarea>';
+    var template = '<textarea max-characters="max" ng-model="model"></textarea>'
 
-    it('truncate text if its length goes over the max number of characters allowed', inject(function ($compile, $rootScope) {
-      $rootScope.model = undefined;
-      $rootScope.max = 5;
+    it('truncate text if its length goes over the max number of characters allowed', function () {
+      $scope.model = undefined
+      $scope.max = 5
 
-      var element = $compile(template)($rootScope);
-      $rootScope.$digest();
+      var element = $compile(template)($scope)
+      $scope.$digest()
 
-      $rootScope.model = 'abcdefgh';
-      $rootScope.$digest();
+      $scope.model = 'abcdefgh'
+      $scope.$digest()
 
-      expect(element.val()).to.equal('abcde');
-    }));
+      expect(element.val()).to.equal('abcde')
+    })
 
-    it('ignores new content when input length reaches the max number of characters allowed', inject(function ($compile, $rootScope) {
-      $rootScope.model = 'abcde';
-      $rootScope.max = 5;
+    it('ignores new content when input length reaches the max number of characters allowed', function () {
+      $scope.model = 'abcde'
+      $scope.max = 5
 
-      var element = $compile(template)($rootScope);
-      $rootScope.$digest();
+      var element = $compile(template)($scope)
+      $scope.$digest()
 
-      expect(element.val()).to.equal('abcde');
+      expect(element.val()).to.equal('abcde')
 
-      $rootScope.model = 'abcdef';
-      $rootScope.$digest();
+      $scope.model = 'abcdef'
+      $scope.$digest()
 
-      expect(element.val()).to.equal('abcde');
+      expect(element.val()).to.equal('abcde')
 
-      $rootScope.model = 'abcdfe';
-      $rootScope.$digest();
+      $scope.model = 'abcdfe'
+      $scope.$digest()
 
-      expect(element.val()).to.equal('abcde');
-    }));
-  });
-});
+      expect(element.val()).to.equal('abcde')
+    })
+  })
+})

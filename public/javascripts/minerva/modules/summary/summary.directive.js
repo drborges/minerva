@@ -7,7 +7,7 @@ angular.module('minerva.summary')
       },
       restrict: 'E',
       replace: true,
-      templateUrl: 'templates/summary.html',
+      templateUrl: '/templates/summary.html',
       link: function (scope, element) {
         var achievements = element.find('.achievements');
         var shouts = element.find('.shouts');

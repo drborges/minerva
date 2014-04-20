@@ -1,4 +1,6 @@
 var path = require('path')
+  , fs = require('fs')
+  , elasticsearch = require('elasticsearch')
 
 var gulp = require('gulp')
   , plumber = require('gulp-plumber')
@@ -19,8 +21,9 @@ var files = {
   appBundle: 'public/javascripts/dist/app.js',
   distBundle: 'public/javascripts/dist/app.min.js',
   specs: ['spec/**/*.js', '!spec/specs.js'],
+  datasources: ['datasources/feedback.json'],
   app: [
-    'public/javascripts/minerva/app.js',
+    'public/javascripts/minerva/index.js',
     'public/javascripts/minerva/modules/**/index.js',
     'public/javascripts/minerva/routes.js',
     'public/javascripts/minerva/modules/**/*.js'
@@ -109,4 +112,21 @@ gulp.task('min', ['pre-min'], function () {
 
 gulp.task('clean', function() {
   gulp.src([ files.appBundle, files.specBundle, path.dirname(files.distBundle) ]).pipe(shell('rm -rf <%= file.path %>'))
+})
+
+gulp.task('datasource', function () {
+  var client = elasticsearch.Client()
+  files.datasources.forEach(function (fileName) {
+    fs.readFile(fileName, 'utf8', function (err, data) {
+      if (err) {
+        console.log('Error: ' + err);
+        return
+      }
+
+      documents = JSON.parse(data)
+      documents.forEach(function (document) {
+        client.index(document)
+      })
+    })
+  })
 })

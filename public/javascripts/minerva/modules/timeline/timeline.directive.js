@@ -6,6 +6,6 @@ angular.module('minerva.timeline')
         activity: '=activity'
       },
       restrict: 'E',
-      templateUrl: 'templates/timeline.html'
+      templateUrl: '/templates/timeline.html'
     };
   });

@@ -1,11 +1,12 @@
 <div class="composer" ng-init="maxCharacters = 300">
   <textarea
     max-characters="maxCharacters"
-    ng-model="model"
+    ng-model="feedback"
     class="form-control"
     placeholder="Feedback to a @user with #tags"></textarea>
 
   <div class="info">
-    <span class="characters-left">{{ model | charactersLeft: maxCharacters }}</span>
+    <span class="characters-left">{{ feedback | charactersLeft: maxCharacters }}</span>
+    <button class="btn btn-primary btn-xs btn-send">Send</button>
   </div>
 </div>

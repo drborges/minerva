@@ -1,4 +1,5 @@
 body {
+  background: url("/images/noise.png");
   background-color: #eee;
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -23,40 +24,57 @@ a {
   text-shadow: 0px 1px 0px #fff;
 }
 
-.summary .data {
+.summary {
   position: relative;
-  font-weight: bold;
-  color: #898f9c;
-  z-index: -1;
   height: 30px;
-  text-shadow: 0px 1px 0px #fff;
 }
 
-.summary .data .achievements,
-.summary .data .shouts,
-.summary .data .back-taps,
-.summary .data .improvements,
-.summary .data .screw-ups {
-  opacity: 0;
-  position: relative;
-  top: 20px;
+.summary .bar,
+.summary .icons,
+.summary .data {
+  position: absolute;
+  width: 100%;
+}
+
+.summary .icons,
+.summary .data {
+  z-index: -1;
+  text-shadow: 0px 1px 0px #fff;
 
   transition: top 0.2s ease-in-out;
   -webkit-transition: top 0.2s ease-in-out;
   -moz-transition: top 0.2s ease-in-out;
 }
 
-.summary:hover .data .achievements,
-.summary:hover .data .shouts,
-.summary:hover .data .back-taps,
-.summary:hover .data .improvements,
-.summary:hover .data .screw-ups {
-  opacity: 1;
-  top: 12px;
-}
-
 .summary .bar {
   height: 4px;
+  bottom: 0px;
+}
+
+.summary .icons {
+  opacity: 1;
+  top: 5px;
+  font-size: 12px;
+
+  transition: top 0.2s ease-in-out;
+  -webkit-transition: top 0.2s ease-in-out;
+  -moz-transition: top 0.2s ease-in-out;
+}
+
+.summary .data {
+  font-weight: bold;
+  opacity: 0;
+  top: 25px;
+}
+
+.summary:hover .data {
+  opacity: 1;
+  top: 5px;
+}
+
+.summary:hover .icons {
+  opacity: 0;
+  top: 30px;
 }
 
 .summary .achievements,
@@ -64,6 +82,7 @@ a {
 .summary .back-taps,
 .summary .improvements,
 .summary .screw-ups {
+  position: relative;
   text-align: center;
   float: left;
   height: 100%;
@@ -150,23 +169,28 @@ a {
   text-shadow: 0px 1px 0px #fff;
 }
 
-.feedback .info .extra .fa-trophy {
+.feedback .info .extra .fa-trophy,
+.summary .achievements {
   color: #69bf13;
 }
 
-.feedback .info .extra .fa-bullhorn {
+.feedback .info .extra .fa-bullhorn,
+.summary .shouts {
   color: #00aeef;
 }
 
-.feedback .info .extra .fa-star-o {
+.feedback .info .extra .fa-star-o,
+.summary .back-taps {
   color: #898f9c;
 }
 
-.feedback .info .extra .fa-exclamation-triangle {
+.feedback .info .extra .fa-exclamation-triangle,
+.summary .improvements {
   color: #ddaa44;
 }
 
-.feedback .info .extra .fa-fire {
+.feedback .info .extra .fa-fire,
+.summary .screw-ups {
   color: #ff4444;
 }
 
@@ -237,5 +261,9 @@ a {
 
 .feedback .info .separator {
   vertical-align: super;
+  font-size: 10px;
+}
+
+.btn btn-primary {
   font-size: 10px;
 }

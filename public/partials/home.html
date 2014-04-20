@@ -2,8 +2,8 @@
   <summary for="controller.loggedInUser.summary"></summary>
 </div>
 
-<div>
-  <composer ng-model="composer"></composer>
+<div ng-controller="ComposerCtrl as composer">
+  <composer on-send="composer.send(feedback)"></composer>
 </div>
 
 <div ng-controller="TimelineCtrl as timeline">

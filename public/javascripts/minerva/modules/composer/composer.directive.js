@@ -3,9 +3,15 @@ angular.module('minerva.composer')
   .directive('composer', function () {
     return {
       scope: {
-        model: '=ngModel'
+        onSend: '&'
       },
       restrict: 'E',
-      templateUrl: 'templates/composer.html'
+      templateUrl: '/templates/composer.html',
+      link: function (scope, element) {
+        scope.feedback = '';
+        element.find('.btn-send').on('click', function () {
+          scope.onSend({ feedback: scope.feedback });
+        });
+      }
     };
   });

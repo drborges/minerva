@@ -37,8 +37,9 @@ a {
 .summary .data .back-taps,
 .summary .data .improvements,
 .summary .data .screw-ups {
+  opacity: 0;
   position: relative;
-  top: 50px;
+  top: 20px;
 
   transition: top 0.2s ease-in-out;
   -webkit-transition: top 0.2s ease-in-out;
@@ -50,6 +51,7 @@ a {
 .summary:hover .data .back-taps,
 .summary:hover .data .improvements,
 .summary:hover .data .screw-ups {
+  opacity: 1;
   top: 12px;
 }
 
@@ -114,7 +116,7 @@ a {
 
 .composer .form-control:focus {
   height: 120px;
-  box-shadow: 0px 0px 10px #999;
+  box-shadow: 0px 0px 6px #aaa;
 }
 
 .composer .form-control:focus ~ .info {
@@ -132,6 +134,10 @@ a {
   font-size: 10px;
   text-align: right;
   text-shadow: 0px 1px 0px #fff;
+}
+
+.composer .info .characters-left {
+  margin-right: 5px;
 }
 
 .feedback {

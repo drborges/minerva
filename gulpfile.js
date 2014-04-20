@@ -20,8 +20,13 @@ var files = {
   specBundle: 'spec/specs.js',
   appBundle: 'public/javascripts/dist/app.js',
   distBundle: 'public/javascripts/dist/app.min.js',
-  specs: ['spec/**/*.js', '!spec/specs.js'],
-  datasources: ['datasources/feedback.json'],
+  specs: {
+    unit: ['spec/**/unit/*.spec.js', '!spec/specs.js'],
+    e2e: 'spec/**/e2e/*.e2e.js'
+  },
+  datasources: {
+    feedbacks: 'datasources/feedback.json'
+  },
   app: [
     'public/javascripts/minerva/index.js',
     'public/javascripts/minerva/modules/**/index.js',
@@ -72,7 +77,7 @@ gulp.task('auto-concat-app', function() {
 })
 
 gulp.task('auto-concat-specs', function() {
-  concatFiles({ watch: true, src: files.specs, dest: files.specBundle })
+  concatFiles({ watch: true, src: files.specs.unit, dest: files.specBundle })
 })
 
 gulp.task('auto-lint', function () {
@@ -84,7 +89,7 @@ gulp.task('spec', function () {
 })
 
 gulp.task('concat-specs', function() {
-  return concatFiles({ watch: false, src: files.specs, dest: files.specBundle })
+  return concatFiles({ watch: false, src: files.specs.unit, dest: files.specBundle })
 })
 
 gulp.task('concat-app', function() {
@@ -114,19 +119,33 @@ gulp.task('clean', function() {
   gulp.src([ files.appBundle, files.specBundle, path.dirname(files.distBundle) ]).pipe(shell('rm -rf <%= file.path %>'))
 })
 
-gulp.task('datasource', function () {
+gulp.task('index.all.delete', function (done) {
   var client = elasticsearch.Client()
-  files.datasources.forEach(function (fileName) {
-    fs.readFile(fileName, 'utf8', function (err, data) {
-      if (err) {
-        console.log('Error: ' + err);
-        return
-      }
+  client.indices.delete({ 'index': '*' }).then(function () {
+    done()
+  }, function () {
+    done()
+  })
+})
 
-      documents = JSON.parse(data)
-      documents.forEach(function (document) {
-        client.index(document)
-      })
-    })
+gulp.task('index.feedbacks', function (done) {
+  var client = elasticsearch.Client()
+  fs.readFile(files.datasources.feedbacks, 'utf8', function (err, data) {
+    if (err) {
+      console.log('Error: ' + err);
+      return
+    }
+
+    var documents = JSON.parse(data)
+    var bulkOperations = [].concat.apply([], documents.map(function (document) {
+      return [{ index:  { _index: 'minerva', _type: 'feedback' } }, document]
+    }))
+
+    client.bulk({ body: bulkOperations }).then(function () {
+      done()
+    }, function (err) {
+      console.log(err)
+      done()
+    });
   })
 })

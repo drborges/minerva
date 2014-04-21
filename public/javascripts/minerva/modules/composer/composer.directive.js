@@ -11,7 +11,9 @@ angular.module('minerva.composer')
       link: function (scope, element) {
         scope.feedback = '';
         element.find('button').on('click', function () {
-          scope.onSend({ feedback: scope.feedback });
+          scope.$apply(function () {
+            scope.onSend({ feedback: scope.feedback });
+          });
         });
       }
     };

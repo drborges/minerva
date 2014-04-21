@@ -1,7 +1,7 @@
 angular.module('minerva.composer')
 
-  .controller('ComposerCtrl', function () {
+  .controller('ComposerCtrl', function ($rootScope) {
     this.send = function (feedback) {
-      console.log(feedback);
+      $rootScope.$emit('minerva.composer.feedback', { type: 'achievement', content: feedback })
     };
   });

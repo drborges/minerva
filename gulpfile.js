@@ -47,8 +47,19 @@ var files = {
   }
 }
 
+var done = function (cb) {
+  return function () { cb() }
+}
+
+var error = function (err, cb) {
+  return function () {
+    console.error(err)
+    cb()
+  }
+}
+
 var runTests = function (config) {
-  return gulp.src([ files.appBundle, files.specBundle ])
+  return gulp.src([ files.appBundle, files.specBundle, files.templates.bundle ])
     .pipe(config.watch ? watch() : gutil.noop())
     .pipe(plumber())
     .pipe(shell('mocha-phantomjs -R dot spec/spec.runner.html'))
@@ -62,21 +73,6 @@ var concatFiles = function (config) {
     .pipe(gulp.dest(path.dirname(config.dest)))
 }
 
-var concatAngularTemplates = function (config) {
-  var options = {
-    module: 'minerva.templates',
-    root: '/templates',
-    standalone: true,
-    filename: path.basename(config.dest)
-  }
-
-  return gulp.src(config.src)
-    .pipe(config.watch ? watch() : gutil.noop())
-    .pipe(plumber())
-    .pipe(angularTemplateCache(options))
-    .pipe(gulp.dest(path.dirname(files.templates.bundle)))
-}
-
 /*
  * Attention: auto.* tasks are not sync tasks, which means they
  * should never return streams/promises, otherwise tasks using
@@ -84,7 +80,7 @@ var concatAngularTemplates = function (config) {
  */
 
 gulp.task('dist', ['min'])
-gulp.task('tdd', ['auto.test', 'auto.lint'])
+gulp.task('tdd', ['auto.test', 'auto.lint', 'auto.concat.templates'])
 gulp.task('default', ['server', 'livereload', 'auto.concat.app'])
 gulp.task('auto.concat', ['auto.concat.app', 'auto.concat.specs'])
 
@@ -114,7 +110,7 @@ gulp.task('auto.concat.specs', function() {
 })
 
 gulp.task('auto.concat.templates', function () {
-  concatAngularTemplates({ watch: true, src: files.templates.src, dest: files.templates.bundle })
+  gulp.watch(files.templates.src, ['concat.templates'])
 })
 
 gulp.task('auto.lint', function () {
@@ -134,7 +130,16 @@ gulp.task('concat.app', function() {
 })
 
 gulp.task('concat.templates', function () {
-  return concatAngularTemplates({ watch: false, src: files.templates.src, dest: files.templates.bundle })
+  var options = {
+    module: 'minerva.templates',
+    root: '/templates',
+    standalone: true,
+    filename: path.basename(files.templates.bundle)
+  }
+
+  return gulp.src(files.templates.src)
+    .pipe(angularTemplateCache(options))
+    .pipe(gulp.dest(path.dirname(files.templates.bundle)))
 })
 
 gulp.task('lint', function () {
@@ -168,16 +173,12 @@ gulp.task('clean', function() {
     .pipe(shell('rm -rf <%= file.path %>'))
 })
 
-gulp.task('index.all.delete', function (done) {
+gulp.task('index.all.delete', function (cb) {
   var client = elasticsearch.Client()
-  client.indices.delete({ 'index': '*' }).then(function () {
-    done()
-  }, function () {
-    done()
-  })
+  client.indices.delete({ 'index': '*' }).then(done(cb), error(cb))
 })
 
-gulp.task('index.feedbacks', function (done) {
+gulp.task('index.feedbacks', function (cb) {
   var client = elasticsearch.Client()
   fs.readFile(files.datasources.feedbacks, 'utf8', function (err, data) {
     if (err) {
@@ -190,11 +191,6 @@ gulp.task('index.feedbacks', function (done) {
       return [{ index:  { _index: 'minerva', _type: 'feedback' } }, document]
     }))
 
-    client.bulk({ body: bulkOperations }).then(function () {
-      done()
-    }, function (err) {
-      console.log(err)
-      done()
-    })
+    client.bulk({ body: bulkOperations }).then(done(cb), error(err, cb))
   })
 })

@@ -1,6 +1,10 @@
 angular.module('minerva.summary')
 
-  .controller('SummaryCtrl', function () {
+  .controller('SummaryCtrl', function ($rootScope) {
+    $rootScope.$on('minerva.composer.feedback', function (event, feedback) {
+      console.log(feedback);
+    });
+
     this.loggedInUser = {
       summary: {
         achievements: {

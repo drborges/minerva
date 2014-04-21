@@ -40,6 +40,8 @@
     "gulp-rename": "~1.2.0",
     "gulp-jshint": "~1.5.3",
     "jshint-stylish": "~0.1.5",
-    "through2": "~0.4.1"
+    "gulp-angular-templatecache": "~1.1.2",
+    "tiny-lr": "0.0.5",
+    "connect-livereload": "~0.4.0"
   }
 }

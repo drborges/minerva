@@ -31,7 +31,7 @@ var files = {
   },
   templates: {
     src: 'public/templates/*.html',
-    bundle: 'public/javascripts/minerva/modules/templates/index.js'
+    bundle: 'spec/templates.js'
   },
   datasources: {
     feedbacks: 'datasources/feedback.json'
@@ -159,7 +159,7 @@ gulp.task('clean', function() {
     files.appBundle,
     files.specBundle,
     path.dirname(files.distBundle),
-    path.dirname(files.templates.bundle)
+    files.templates.bundle
   ]
 
   gulp.src(generatedFiles)

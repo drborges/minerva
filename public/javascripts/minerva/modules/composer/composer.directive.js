@@ -5,11 +5,12 @@ angular.module('minerva.composer')
       scope: {
         onSend: '&'
       },
+      replace: true,
       restrict: 'E',
       templateUrl: '/templates/composer.html',
       link: function (scope, element) {
         scope.feedback = '';
-        element.find('.btn-send').on('click', function () {
+        element.find('button').on('click', function () {
           scope.onSend({ feedback: scope.feedback });
         });
       }

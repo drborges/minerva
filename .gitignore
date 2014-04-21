@@ -3,5 +3,5 @@ bower_components
 vendor
 *.log
 public/javascripts/dist
-public/javascripts/app.js
+public/javascripts/minerva/modules/templates
 spec/specs.js

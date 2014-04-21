@@ -36,13 +36,15 @@ var files = {
   datasources: {
     feedbacks: 'datasources/feedback.json'
   },
-  public: 'public/**/*',
-  app: [
-    'public/javascripts/minerva/index.js',
-    'public/javascripts/minerva/modules/**/index.js',
-    'public/javascripts/minerva/routes.js',
-    'public/javascripts/minerva/modules/**/*.js'
-  ]
+  app: {
+    js: [
+      'public/javascripts/minerva/index.js',
+      'public/javascripts/minerva/modules/**/index.js',
+      'public/javascripts/minerva/routes.js',
+      'public/javascripts/minerva/modules/**/*.js'
+    ],
+    public: 'public/**/*',
+  }
 }
 
 var runTests = function (config) {
@@ -72,7 +74,7 @@ var concatAngularTemplates = function (config) {
     .pipe(config.watch ? watch() : gutil.noop())
     .pipe(plumber())
     .pipe(angularTemplateCache(options))
-    .pipe(gulp.dest(path.dirname(files.templates.bundle)));
+    .pipe(gulp.dest(path.dirname(files.templates.bundle)))
 }
 
 /*
@@ -94,17 +96,17 @@ gulp.task('server', function () {
 
 gulp.task('livereload', function() {
   livereloadServer.listen(35729)
-  gulp.watch(files.public, function (file) {
+  gulp.watch(files.app.public, function (file) {
     livereloadServer.changed({ body: { files: [file.path] }})
   })
-});
+})
 
 gulp.task('auto.test', ['auto.concat'], function () {
   runTests({ watch: true })
 })
 
 gulp.task('auto.concat.app', function() {
-  concatFiles({ watch: true, src: files.app, dest: files.appBundle })
+  concatFiles({ watch: true, src: files.app.js, dest: files.appBundle })
 })
 
 gulp.task('auto.concat.specs', function() {
@@ -116,7 +118,7 @@ gulp.task('auto.concat.templates', function () {
 })
 
 gulp.task('auto.lint', function () {
-  gulp.watch(files.app, ['lint'])
+  gulp.watch(files.app.js, ['lint'])
 })
 
 gulp.task('spec', function () {
@@ -128,7 +130,7 @@ gulp.task('concat.specs', function() {
 })
 
 gulp.task('concat.app', function() {
-  return concatFiles({ watch: false, src: files.app, dest: files.appBundle })
+  return concatFiles({ watch: false, src: files.app.js, dest: files.appBundle })
 })
 
 gulp.task('concat.templates', function () {
@@ -136,7 +138,7 @@ gulp.task('concat.templates', function () {
 })
 
 gulp.task('lint', function () {
-  return gulp.src(files.app)
+  return gulp.src(files.app.js)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
 })
@@ -179,7 +181,7 @@ gulp.task('index.feedbacks', function (done) {
   var client = elasticsearch.Client()
   fs.readFile(files.datasources.feedbacks, 'utf8', function (err, data) {
     if (err) {
-      console.log('Error: ' + err);
+      console.log('Error: ' + err)
       return
     }
 
@@ -193,6 +195,6 @@ gulp.task('index.feedbacks', function (done) {
     }, function (err) {
       console.log(err)
       done()
-    });
+    })
   })
 })

@@ -2,44 +2,50 @@ angular.module('minerva.summary')
 
   .directive('summary', function () {
     return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      template: '<div class="summary" ng-transclude></div>',
+      controller: function () {
+        var metrics = {};
+
+        this.add = function (metric) {
+          metrics[metric.name] = metric.count;
+        };
+
+        this.metricRate = function (metricName) {
+          var metricsNames = Object.keys(metrics);
+          var metricsCount = metricsNames.length;
+          var metricsTotalSum = metricsNames.reduce(function (sum, name) {
+            return sum + metrics[name];
+          }, 0);
+
+          return (metrics[metricName] * 100.0) / metricsTotalSum + '%';
+        };
+      }
+    };
+  })
+
+  .directive('metric', function () {
+    return {
       scope: {
-        summary: '=for'
+        name: '@',
+        icon: '@',
+        color: '@',
+        count: '='
       },
       restrict: 'E',
       replace: true,
-      templateUrl: '/templates/summary.html',
-      link: function (scope, element) {
-        var achievements = element.find('.metric.achievements');
-        var achievementsChart = achievements.find('.chart');
+      require: '^summary',
+      templateUrl: 'templates/metric.html',
+      link: function (scope, element, attrs, summary) {
+        summary.add({ name: scope.name, count: scope.count });
 
-        var shouts = element.find('.metric.shouts');
-        var shoutsChart = shouts.find('.chart');
+        element.find('.chart').css('background-color', scope.color);
 
-        var backTaps = element.find('.metric.back-taps');
-        var backTapsChart = backTaps.find('.chart');
-
-        var improvements = element.find('.metric.improvements');
-        var improvementsChart = improvements.find('.chart');
-
-        var screwUps = element.find('.metric.screw-ups');
-        var screwUpsChart = screwUps.find('.chart');
-
-        scope.$watch('summary', function (summary) {
-          achievements.css('width', summary.achievements.rate);
-          achievementsChart.css('background-color', '#69bf13');
-
-          shouts.css('width', summary.shouts.rate);
-          shoutsChart.css('background-color', '#00aeef');
-
-          backTaps.css('width', summary.backTaps.rate);
-          backTapsChart.css('background-color', '#898f9c');
-
-          improvements.css('width', summary.improvements.rate);
-          improvementsChart.css('background-color', '#ddaa44');
-
-          screwUps.css('width', summary.screwUps.rate);
-          screwUpsChart.css('background-color', '#ff4444');
-        }, true);
+        scope.$watch('count', function () {
+          element.css('width', summary.metricRate(scope.name));
+        });
       }
-    };
+    }
   });

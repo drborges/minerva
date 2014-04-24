@@ -1,8 +1,8 @@
 angular.module('minerva.summary')
 
-  .controller('SummaryCtrl', function ($rootScope) {
-    $rootScope.$on('minerva.composer.feedback', function (event, feedback) {
-      console.log(feedback);
+  .controller('SummaryCtrl', function ($rootScope, $log) {
+    $rootScope.$on('minerva.composer.feedback.sent', function (event, feedback) {
+      $log.info(feedback);
     });
 
     this.loggedInUser = {

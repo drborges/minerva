@@ -4,4 +4,5 @@ vendor
 *.log
 public/javascripts/dist
 public/javascripts/minerva/modules/templates
+spec/templates.js
 spec/specs.js

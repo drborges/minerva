@@ -26,8 +26,8 @@ var files = {
   appBundle: 'public/javascripts/dist/app.js',
   distBundle: 'public/javascripts/dist/app.min.js',
   specs: {
-    unit: ['spec/**/unit/*.spec.js', '!spec/specs.js'],
-    e2e: 'spec/**/e2e/*.e2e.js'
+    unit: ['spec/unit/**/*.spec.js', '!spec/specs.js'],
+    e2e: 'spec/e2e/**/*.e2e.js'
   },
   templates: {
     src: 'public/templates/*.html',

@@ -24,91 +24,73 @@ a {
   text-shadow: 0px 1px 0px #fff;
 }
 
+/***********/
+/* Summary */
+/***********/
+
 .summary {
   position: relative;
   height: 30px;
 }
 
-.summary .bar,
-.summary .icons,
-.summary .data {
-  position: absolute;
-  width: 100%;
-}
-
-.summary .icons,
-.summary .data {
-  z-index: -1;
-  text-shadow: 0px 1px 0px #fff;
-
-  transition: top 0.2s ease-in-out;
-  -webkit-transition: top 0.2s ease-in-out;
-  -moz-transition: top 0.2s ease-in-out;
-}
-
-.summary .bar {
-  height: 4px;
-  bottom: 0px;
-}
-
-.summary .icons {
-  opacity: 1;
-  top: 5px;
-  font-size: 12px;
-
-  transition: top 0.2s ease-in-out;
-  -webkit-transition: top 0.2s ease-in-out;
-  -moz-transition: top 0.2s ease-in-out;
-}
-
-.summary .data {
-  font-weight: bold;
-  opacity: 0;
-  top: 25px;
-}
-
-.summary:hover .data {
-  opacity: 1;
-  top: 5px;
-}
-
-.summary:hover .icons {
-  opacity: 0;
-  top: 30px;
-}
-
-.summary .achievements,
-.summary .shouts,
-.summary .back-taps,
-.summary .improvements,
-.summary .screw-ups {
+.summary .metric {
   position: relative;
-  text-align: center;
   float: left;
   height: 100%;
 }
 
-.summary .bar .achievements {
+.summary .metric > * {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  text-shadow: 0px 1px 0px #fff;
+}
+
+.summary .metric:first-child .chart {
   border-top-left-radius: 2px;
-  background-color: #69bf13;
 }
 
-.summary .bar .shouts {
-  background-color: #00aeef;
-}
-
-.summary .bar .back-taps {
-  background-color: #898f9c;
-}
-
-.summary .bar .improvements {
-  background-color: #ddaa44;
-}
-
-.summary .bar .screw-ups {
+.summary .metric:last-child .chart {
   border-top-right-radius: 2px;
-  background-color: #ff4444;
 }
+
+.summary .metric .chart {
+  height: 4px;
+  bottom: 3px;
+}
+
+.summary .metric .icon {
+  top: 6px;
+  opacity: 1;
+  z-index: -1;
+}
+
+.summary .metric .count {
+  top: 15px;
+  opacity: 0;
+  z-index: -1;
+}
+
+.summary .metric .count,
+.summary .metric .icon {
+          transition: all 0.2s ease-in-out;
+     -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
+.summary:hover .count {
+  top: -8px;
+  opacity: 1;
+}
+
+.summary:hover .icon {
+  top: 15px;
+  opacity: 0;
+}
+
+/************/
+/* Composer */
+/************/
 
 .composer {
   margin-bottom: 20px;

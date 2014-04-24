@@ -1,23 +1,31 @@
 <div class="summary">
-  <div class="icons">
-    <div class="achievements"><i class="type fa fa-trophy"></i></div>
-    <div class="shouts"><i class="type fa fa-bullhorn"></i></div>
-    <div class="back-taps"><i class="type fa fa-star-o"></i></div>
-    <div class="improvements"><i class="type fa fa-exclamation-triangle"></i></div>
-    <div class="screw-ups"><i class="type fa fa-fire"></i></div>
+  <div class="metric achievements">
+    <div class="icon"><i class="type fa fa-trophy"></i></div>
+    <div class="count">{{summary.achievements.count}}</div>
+    <div class="chart"></div>
   </div>
-  <div class="data">
-    <div class="achievements">{{summary.achievements.count}}</div>
-    <div class="shouts">{{summary.shouts.count}}</div>
-    <div class="back-taps">{{summary.backTaps.count}}</div>
-    <div class="improvements">{{summary.improvements.count}}</div>
-    <div class="screw-ups">{{summary.screwUps.count}}</div>
+
+  <div class="metric shouts">
+    <div class="icon"><i class="type fa fa-bullhorn"></i></div>
+    <div class="count">{{summary.shouts.count}}</div>
+    <div class="chart"></div>
   </div>
-  <div class="bar">
-    <div class="achievements"></div><!--
-    --><div class="shouts"></div><!--
-    --><div class="back-taps"></div><!--
-    --><div class="improvements"></div><!--
-    --><div class="screw-ups"></div>
+
+  <div class="metric back-taps">
+    <div class="icon"><i class="type fa fa-star-o"></i></div>
+    <div class="count">{{summary.backTaps.count}}</div>
+    <div class="chart"></div>
+  </div>
+
+  <div class="metric improvements">
+    <div class="icon"><i class="type fa fa-exclamation-triangle"></i></div>
+    <div class="count">{{summary.improvements.count}}</div>
+    <div class="chart"></div>
+  </div>
+
+  <div class="metric screw-ups">
+    <div class="icon"><i class="type fa fa-fire"></i></div>
+    <div class="count">{{summary.screwUps.count}}</div>
+    <div class="chart"></div>
   </div>
 </div>

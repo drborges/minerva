@@ -175,7 +175,7 @@ gulp.task('clean', function() {
 
 gulp.task('index.all.delete', function (cb) {
   var client = elasticsearch.Client()
-  client.indices.delete({ 'index': '*' }).then(done(cb), error(cb))
+  client.indices.delete({ 'index': '*' }).then(done(cb)).catch(error(cb))
 })
 
 gulp.task('index.feedbacks', function (cb) {
@@ -191,6 +191,6 @@ gulp.task('index.feedbacks', function (cb) {
       return [{ index:  { _index: 'minerva', _type: 'feedback' } }, document]
     }))
 
-    client.bulk({ body: bulkOperations }).then(done(cb), error(err, cb))
+    client.bulk({ body: bulkOperations }).then(done(cb)).catch(error(err, cb))
   })
 })

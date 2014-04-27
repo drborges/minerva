@@ -78,14 +78,34 @@ a {
   -webkit-transition: all 0.2s ease-in-out;
 }
 
-.summary:hover .count {
+.summary:hover .metric .count {
   top: -8px;
   opacity: 1;
 }
 
-.summary:hover .icon {
+.summary:hover .metric .icon {
   top: 10px;
   opacity: 0;
+}
+
+.summary .metric.achievements .chart {
+  background-color: #69bf13;
+}
+
+.summary .metric.shouts .chart {
+  background-color: #00aeef;
+}
+
+.summary .metric.back-taps .chart {
+  background-color: #898f9c;
+}
+
+.summary .metric.improvements .chart {
+  background-color: #ddaa44;
+}
+
+.summary .metric.screw-ups .chart {
+  background-color: #ff4444;
 }
 
 /************/

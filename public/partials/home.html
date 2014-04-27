@@ -1,33 +1,33 @@
 <div ng-controller="SummaryCtrl as controller">
   <summary>
     <metric
+      class="achievements"
       name="achievements"
       icon="fa fa-trophy"
-      color="#69bf13"
       count="controller.loggedInUser.summary.achievements.count"></metric>
 
     <metric
+      class="shouts"
       name="shouts"
       icon="fa fa-bullhorn"
-      color="#00aeef"
       count="controller.loggedInUser.summary.shouts.count"></metric>
 
     <metric
+      class="back-taps"
       name="back-taps"
       icon="fa fa-star-o"
-      color="#898f9c"
       count="controller.loggedInUser.summary.backTaps.count"></metric>
 
     <metric
+      class="improvements"
       name="improvements"
       icon="fa fa-exclamation-triangle"
-      color="#ddaa44"
       count="controller.loggedInUser.summary.improvements.count"></metric>
 
     <metric
+      class="screw-ups"
       name="screw-ups"
       icon="fa fa-fire"
-      color="#ff4444"
       count="controller.loggedInUser.summary.screwUps.count"></metric>
   </summary>
 </div>

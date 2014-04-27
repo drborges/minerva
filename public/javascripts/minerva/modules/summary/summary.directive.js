@@ -9,18 +9,23 @@ angular.module('minerva.summary')
       controller: function () {
         var metrics = {};
 
-        this.add = function (metric) {
-          metrics[metric.name] = metric.count;
-        };
-
-        this.metricRate = function (metricName) {
-          var metricsNames = Object.keys(metrics);
-          var metricsCount = metricsNames.length;
-          var metricsTotalSum = metricsNames.reduce(function (sum, name) {
-            return sum + metrics[name];
+        function metricRate(metricName, metrics) {
+          var metricsTotalSum = Object.keys(metrics).reduce(function (sum, name) {
+            return sum + metrics[name].count;
           }, 0);
 
-          return (metrics[metricName] * 100.0) / metricsTotalSum + '%';
+          return (metrics[metricName].count * 100) / metricsTotalSum;
+        }
+
+        function updateRates(metrics) {
+          Object.keys(metrics).forEach(function (name) {
+            metrics[name].element.css('width', metricRate(name, metrics) + '%');
+          });
+        }
+
+        this.add = function (name, count, element) {
+          metrics[name] = { count: count, element: element };
+          updateRates(metrics);
         };
       }
     };
@@ -31,20 +36,15 @@ angular.module('minerva.summary')
       scope: {
         name: '@',
         icon: '@',
-        color: '@',
         count: '='
       },
       restrict: 'E',
       replace: true,
       require: '^summary',
-      templateUrl: 'templates/metric.html',
+      templateUrl: '/templates/metric.html',
       link: function (scope, element, attrs, summary) {
-        summary.add({ name: scope.name, count: scope.count });
-
-        element.find('.chart').css('background-color', scope.color);
-
-        scope.$watch('count', function () {
-          element.css('width', summary.metricRate(scope.name));
+        scope.$watch('count', function (newCount) {
+          summary.add(scope.name, newCount, element);
         });
       }
     }

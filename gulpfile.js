@@ -26,6 +26,7 @@ var files = {
   appBundle: 'public/javascripts/dist/app.js',
   distBundle: 'public/javascripts/dist/app.min.js',
   specs: {
+    runner: 'spec/spec.runner.html',
     unit: ['spec/unit/**/*.spec.js', '!spec/specs.js'],
     e2e: 'spec/e2e/**/*.e2e.js'
   },
@@ -58,13 +59,6 @@ var error = function (err, cb) {
   }
 }
 
-var runTests = function (config) {
-  return gulp.src([ files.appBundle, files.specBundle, files.templates.bundle ])
-    .pipe(config.watch ? watch() : gutil.noop())
-    .pipe(plumber())
-    .pipe(shell('mocha-phantomjs -R dot spec/spec.runner.html'))
-}
-
 var concatFiles = function (config) {
   return gulp.src(config.src)
     .pipe(config.watch ? watch({ glob: config.src }) : gutil.noop())
@@ -80,9 +74,9 @@ var concatFiles = function (config) {
  */
 
 gulp.task('dist', ['min'])
-gulp.task('tdd', ['auto.test', 'auto.lint', 'auto.concat.templates'])
+gulp.task('tdd', ['auto.test', 'auto.lint'])
 gulp.task('default', ['server', 'livereload', 'auto.concat.app'])
-gulp.task('auto.concat', ['auto.concat.app', 'auto.concat.specs'])
+gulp.task('auto.concat', ['auto.concat.app', 'auto.concat.specs', 'auto.concat.templates'])
 
 gulp.task('server', function () {
   app.use(connectLivereload())
@@ -98,7 +92,10 @@ gulp.task('livereload', function() {
 })
 
 gulp.task('auto.test', ['auto.concat'], function () {
-  runTests({ watch: true })
+  return gulp.src([ files.appBundle, files.specBundle, files.templates.bundle ])
+    .pipe(watch())
+    .pipe(plumber())
+    .pipe(shell('mocha-phantomjs -R dot spec/spec.runner.html'))
 })
 
 gulp.task('auto.concat.app', function() {
@@ -118,7 +115,8 @@ gulp.task('auto.lint', function () {
 })
 
 gulp.task('spec', function () {
-  return runTests({ autotest: false })
+  return gulp.src(files.specs.runner)
+    .pipe(shell('mocha-phantomjs -R dot <%= file.path %>'))
 })
 
 gulp.task('concat.specs', function() {

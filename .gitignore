@@ -2,6 +2,7 @@ node_modules
 bower_components
 vendor
 *.log
+*.pid
 public/javascripts/dist
 public/javascripts/minerva/modules/templates
 spec/templates.js

@@ -1,16 +1,17 @@
 var path = require('path')
   , fs = require('fs')
   , stylish = require('jshint-stylish')
-  , elasticsearch = require('elasticsearch')
-  , livereloadServer = require('tiny-lr')()
+  , server = require('tiny-lr')()
   , connectLivereload = require('connect-livereload')
   , express = require('express')
 
 var app = require('./app')
+  , Indexer = require('./gulps/indexer')
 
 var gulp = require('gulp')
   , plumber = require('gulp-plumber')
   , watch = require('gulp-watch')
+  , reload = require('gulp-livereload')
   , shell = require('gulp-shell')
   , concat = require('gulp-concat')
   , autoConcat = require('gulp-continuous-concat')
@@ -34,29 +35,22 @@ var files = {
     src: 'public/templates/*.html',
     bundle: 'spec/templates.js'
   },
-  datasources: {
-    feedbacks: 'datasources/feedback.json'
-  },
-  app: {
-    js: [
+  datasources: [
+    'datasources/feedback.json'
+  ],
+  js: {
+    client: [
       'public/javascripts/minerva/index.js',
       'public/javascripts/minerva/modules/**/index.js',
       'public/javascripts/minerva/routes.js',
       'public/javascripts/minerva/modules/**/*.js'
     ],
-    public: 'public/**/*',
-  }
-}
-
-var done = function (cb) {
-  return function () { cb() }
-}
-
-var error = function (err, cb) {
-  return function () {
-    console.error(err)
-    cb()
-  }
+    server: [
+      'app.js',
+      'api/**/*.js'
+    ]
+  },
+  public: 'public/**/*',
 }
 
 var concatFiles = function (config) {
@@ -73,10 +67,10 @@ var concatFiles = function (config) {
  * them as dependencies will block.
  */
 
-gulp.task('dist', ['min'])
-gulp.task('tdd', ['auto.test', 'auto.lint'])
-gulp.task('default', ['server', 'livereload', 'auto.concat.app'])
-gulp.task('auto.concat', ['auto.concat.app', 'auto.concat.specs', 'auto.concat.templates'])
+gulp.task('dist', [ 'min' ])
+gulp.task('tdd', [ 'auto.test', 'auto.lint' ])
+gulp.task('default', [ 'server', 'livereload', 'auto.concat.app' ])
+gulp.task('auto.concat', [ 'auto.concat.app', 'auto.concat.specs', 'auto.concat.templates' ])
 
 gulp.task('server', function () {
   app.use(connectLivereload())
@@ -85,21 +79,22 @@ gulp.task('server', function () {
 })
 
 gulp.task('livereload', function() {
-  livereloadServer.listen(35729)
-  gulp.watch(files.app.public, function (file) {
-    livereloadServer.changed({ body: { files: [file.path] }})
+  var appFiles = files.js.client.concat(files.js.server).concat(files.public)
+  server.listen(35729)
+  gulp.watch(appFiles, function (file) {
+    gulp.src(file.path).pipe(reload(server))
   })
 })
 
-gulp.task('auto.test', ['auto.concat'], function () {
-  return gulp.src([ files.appBundle, files.specBundle, files.templates.bundle ])
+gulp.task('auto.test', [ 'auto.concat' ], function () {
+  gulp.src([ files.appBundle, files.specBundle, files.templates.bundle ])
     .pipe(watch())
     .pipe(plumber())
     .pipe(shell('mocha-phantomjs -R dot spec/spec.runner.html'))
 })
 
 gulp.task('auto.concat.app', function() {
-  concatFiles({ watch: true, src: files.app.js, dest: files.appBundle })
+  concatFiles({ watch: true, src: files.js.client, dest: files.appBundle })
 })
 
 gulp.task('auto.concat.specs', function() {
@@ -107,11 +102,15 @@ gulp.task('auto.concat.specs', function() {
 })
 
 gulp.task('auto.concat.templates', function () {
-  gulp.watch(files.templates.src, ['concat.templates'])
+  gulp.watch(files.templates.src, [ 'concat.templates' ])
 })
 
 gulp.task('auto.lint', function () {
-  gulp.watch(files.app.js, ['lint'])
+  gulp.watch(files.js.client, [ 'lint' ])
+})
+
+gulp.task('auto.index', function () {
+  gulp.watch(files.datasources, [ 'index' ])
 })
 
 gulp.task('spec', function () {
@@ -124,7 +123,7 @@ gulp.task('concat.specs', function() {
 })
 
 gulp.task('concat.app', function() {
-  return concatFiles({ watch: false, src: files.app.js, dest: files.appBundle })
+  return concatFiles({ watch: false, src: files.js.client, dest: files.appBundle })
 })
 
 gulp.task('concat.templates', function () {
@@ -141,18 +140,18 @@ gulp.task('concat.templates', function () {
 })
 
 gulp.task('lint', function () {
-  return gulp.src(files.app.js)
+  return gulp.src(files.js.client)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
 })
 
-gulp.task('pre.min', ['concat.app'], function () {
+gulp.task('pre.min', [ 'concat.app' ], function () {
   return gulp.src(files.appBundle)
     .pipe(ngmin())
     .pipe(gulp.dest(path.dirname(files.distBundle)))
 })
 
-gulp.task('min', ['pre.min'], function () {
+gulp.task('min', [ 'pre.min' ], function () {
   return gulp.src(files.appBundle)
     .pipe(uglify())
     .pipe(rename(path.basename(files.distBundle)))
@@ -167,28 +166,12 @@ gulp.task('clean', function() {
     files.templates.bundle
   ]
 
-  gulp.src(generatedFiles)
+  return gulp.src(generatedFiles)
     .pipe(shell('rm -rf <%= file.path %>'))
 })
 
-gulp.task('index.all.delete', function (cb) {
-  var client = elasticsearch.Client()
-  client.indices.delete({ 'index': '*' }).then(done(cb)).catch(error(cb))
-})
-
-gulp.task('index.feedbacks', function (cb) {
-  var client = elasticsearch.Client()
-  fs.readFile(files.datasources.feedbacks, 'utf8', function (err, data) {
-    if (err) {
-      console.log('Error: ' + err)
-      return
-    }
-
-    var documents = JSON.parse(data)
-    var bulkOperations = [].concat.apply([], documents.map(function (document) {
-      return [{ index:  { _index: 'minerva', _type: 'feedback' } }, document]
-    }))
-
-    client.bulk({ body: bulkOperations }).then(done(cb)).catch(error(err, cb))
-  })
+gulp.task('index', function () {
+  return gulp.src(files.datasources)
+    .pipe(Indexer())
+    .pipe(reload(server))
 })

@@ -5,5 +5,3 @@ exports.register = function (app) {
   minerva.register(app);
   feedback.register(app);
 };
-
-

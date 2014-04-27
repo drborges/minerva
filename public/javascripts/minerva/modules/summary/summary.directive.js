@@ -7,24 +7,29 @@ angular.module('minerva.summary')
       transclude: true,
       template: '<div class="summary" ng-transclude></div>',
       controller: function () {
-        var metrics = {};
+        var metrics = [];
 
-        function metricRate(metricName, metrics) {
-          var metricsTotalSum = Object.keys(metrics).reduce(function (sum, name) {
-            return sum + metrics[name].count;
+        function rate(metricCount, metrics) {
+          var metricsTotalSum = metrics.reduce(function (sum, metric) {
+            return sum + metric.count;
           }, 0);
 
-          return (metrics[metricName].count * 100) / metricsTotalSum;
+          return (metricCount * 100) / metricsTotalSum;
         }
 
         function updateRates(metrics) {
-          Object.keys(metrics).forEach(function (name) {
-            metrics[name].element.css('width', metricRate(name, metrics) + '%');
+          metrics.forEach(function (metric) {
+            metric.element.css('width', rate(metric.count, metrics) + '%');
           });
         }
 
-        this.add = function (name, count, element) {
-          metrics[name] = { count: count, element: element };
+        this.register = function (element) {
+          metrics.push({ element: element });
+          return metrics.length - 1;
+        };
+
+        this.add = function (id, count) {
+          metrics[id].count = count;
           updateRates(metrics);
         };
       }
@@ -34,7 +39,6 @@ angular.module('minerva.summary')
   .directive('metric', function () {
     return {
       scope: {
-        name: '@',
         icon: '@',
         count: '='
       },
@@ -43,8 +47,9 @@ angular.module('minerva.summary')
       require: '^summary',
       templateUrl: '/templates/metric.html',
       link: function (scope, element, attrs, summary) {
+        var id = summary.register(element);
         scope.$watch('count', function (newCount) {
-          summary.add(scope.name, newCount, element);
+          summary.add(id, newCount);
         });
       }
     }

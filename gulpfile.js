@@ -69,7 +69,7 @@ var concatFiles = function (config) {
 
 gulp.task('dist', [ 'min' ])
 gulp.task('tdd', [ 'auto.test', 'auto.lint' ])
-gulp.task('default', [ 'server', 'livereload', 'auto.concat.app' ])
+gulp.task('default', [ 'server', 'livereload', 'auto.concat.app', 'auto.index' ])
 gulp.task('auto.concat', [ 'auto.concat.app', 'auto.concat.specs', 'auto.concat.templates' ])
 
 gulp.task('server', function () {
@@ -173,5 +173,4 @@ gulp.task('clean', function() {
 gulp.task('index', function () {
   return gulp.src(files.datasources)
     .pipe(Indexer())
-    .pipe(reload(server))
 })

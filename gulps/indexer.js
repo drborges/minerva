@@ -38,7 +38,9 @@ function Indexer() {
 
     this.push(file)
 
-    return clear(data).then(index(data)).then(done(next))
+    return clear(data)
+      .then(index(data))
+      .then(done(next))
   })
 }
 

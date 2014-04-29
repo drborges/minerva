@@ -1,1 +1,1 @@
-angular.module('minerva.composer', []);
+angular.module('minerva.composer', ['minerva.models']);

@@ -7,5 +7,15 @@ angular.module('minerva.models')
           return response.data;
         });
       },
+
+      fromString: function (string) {
+        var receivers = string.match(/@(\w+)/g) || [];
+        var tags = string.match(/#(\w+)/g) || [];
+        return {
+          receivers: receivers,
+          tags: tags,
+          content: string
+        }
+      }
     };
   });

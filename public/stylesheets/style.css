@@ -211,7 +211,7 @@ a {
   font-size: 10px;
 }
 
-.feedback .sender,
+.feedback .author,
 .feedback .receiver {
   display: inline-block;
   height: 35px;

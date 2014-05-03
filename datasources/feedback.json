@@ -3,14 +3,8 @@
   "type": "feedback",
   "documents": [
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities. Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities. Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities. Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "achievement",
@@ -19,14 +13,8 @@
       "tags": [ "achievement", "scala" ]
     },
     {
-      "receiver": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "sender": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "receiver": "dborges",
+      "author": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "shout",
@@ -35,14 +23,8 @@
       "tags": [ "shout", "devOps", "CD", "chef" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "improvement",
@@ -51,14 +33,8 @@
       "tags": [ "improvement", "javascript" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "screw-up",
@@ -67,14 +43,8 @@
       "tags": [ "screw-up" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "back-tap",
@@ -83,14 +53,8 @@
       "tags": [ "back-tap", "scala", "goal" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "achievement",
@@ -99,14 +63,8 @@
       "tags": [ "achievement", "scala", "goal" ]
     },
     {
-      "receiver": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "sender": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "receiver": "dborges",
+      "author": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "shout",
@@ -115,14 +73,8 @@
       "tags": [ "shout", "scala", "goal" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "improvement",
@@ -131,14 +83,8 @@
       "tags": [ "improvement", "scala", "goal" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "screw-up",
@@ -147,14 +93,8 @@
       "tags": [ "screw-up", "scala", "goal" ]
     },
     {
-      "sender": {
-        "id": "dborges",
-        "name": "Diego Borges"
-      },
-      "receiver": {
-        "id": "drborges",
-        "name": "Diego da Rocha Borges"
-      },
+      "author": "dborges",
+      "receiver": "drborges",
       "content": "Diego helped on the ramp up of 5 team members on a scala techstack, which drastically improved the team turn around capabilities.",
       "createdAt": 1288323623006,
       "type": "back-tap",

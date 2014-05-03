@@ -1,6 +1,6 @@
 angular.module('minerva.composer')
 
-  .directive('composer', function (Feedback) {
+  .directive('composer', function (String2Feedback) {
     return {
       scope: {
         onSend: '&'
@@ -11,7 +11,7 @@ angular.module('minerva.composer')
       link: function (scope, element) {
         element.find('button').on('click', function () {
           scope.$apply(function () {
-            var model = Feedback.fromString(scope.feedback)
+            var model = String2Feedback.apply(scope.feedback);
             scope.onSend({ feedback: model });
           });
         });

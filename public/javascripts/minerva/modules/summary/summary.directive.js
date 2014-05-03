@@ -52,5 +52,5 @@ angular.module('minerva.summary')
           summary.add(id, newCount);
         });
       }
-    }
+    };
   });

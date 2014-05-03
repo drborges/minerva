@@ -3,9 +3,9 @@
   <div class="feedback" ng-repeat="feedback in activity">
 
     <div class="info">
-      <img ng-src="/images/{{feedback.sender.id}}.jpg" class="sender" />
+      <img ng-src="/images/{{feedback.author}}.jpg" class="author" />
       <i class="fa fa-chevron-right"></i>
-      <img ng-src="/images/{{feedback.receiver.id}}.jpg" class="receiver" />
+      <img ng-src="/images/{{feedback.receiver}}.jpg" class="receiver" />
 
       <span class="extra">{{feedback.createdAt | date: 'shortTime'}}</span>
       <span class="separator extra">.</span>

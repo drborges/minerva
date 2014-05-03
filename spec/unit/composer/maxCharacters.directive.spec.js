@@ -7,40 +7,43 @@ describe ('minerva.composer', function () {
     $scope = $rootScope.$new()
   }))
 
-  describe('maxCharacters', function () {
-    var template = '<textarea max-characters="max" ng-model="model"></textarea>'
+  describe('directive', function () {
+    describe('maxCharacters', function () {
 
-    it('truncate text if its length goes over the max number of characters allowed', function () {
-      $scope.model = undefined
-      $scope.max = 5
+      var template = '<textarea max-characters="max" ng-model="model"></textarea>'
 
-      var element = $compile(template)($scope)
-      $scope.$digest()
+      it('truncate text if its length goes over the max number of characters allowed', function () {
+        $scope.model = undefined
+        $scope.max = 5
 
-      $scope.model = 'abcdefgh'
-      $scope.$digest()
+        var element = $compile(template)($scope)
+        $scope.$digest()
 
-      expect(element.val()).to.equal('abcde')
-    })
+        $scope.model = 'abcdefgh'
+        $scope.$digest()
 
-    it('ignores new content when input length reaches the max number of characters allowed', function () {
-      $scope.model = 'abcde'
-      $scope.max = 5
+        expect(element.val()).to.equal('abcde')
+      })
 
-      var element = $compile(template)($scope)
-      $scope.$digest()
+      it('ignores new content when input length reaches the max number of characters allowed', function () {
+        $scope.model = 'abcde'
+        $scope.max = 5
 
-      expect(element.val()).to.equal('abcde')
+        var element = $compile(template)($scope)
+        $scope.$digest()
 
-      $scope.model = 'abcdef'
-      $scope.$digest()
+        expect(element.val()).to.equal('abcde')
 
-      expect(element.val()).to.equal('abcde')
+        $scope.model = 'abcdef'
+        $scope.$digest()
 
-      $scope.model = 'abcdfe'
-      $scope.$digest()
+        expect(element.val()).to.equal('abcde')
 
-      expect(element.val()).to.equal('abcde')
+        $scope.model = 'abcdfe'
+        $scope.$digest()
+
+        expect(element.val()).to.equal('abcde')
+      })
     })
   })
 })

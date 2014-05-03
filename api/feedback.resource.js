@@ -10,7 +10,7 @@ exports.register = function (app) {
   app.get('/api/feedback', function (req, res) {
     var client = elasticsearch.Client();
 
-    client.search({ index: 'minerva', type: 'feedback', size: 50 }).then(function (response) {
+    client.search({ index: 'minerva', type: 'feedback', size: -1 }).then(function (response) {
       var documents = response.hits.hits
         , feedbacks = documents.map(function (document) { return document._source });
 

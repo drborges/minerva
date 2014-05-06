@@ -40,7 +40,7 @@ angular.module('minerva.models')
      *  @return {Array.<Feedback>}
      */
     Feedback.find = function () {
-      return $http.get('/api/feedback').then(function (response) {
+      return $http.get('/api/v1/users/dborges/feedbacks').then(function (response) {
         return response.data;
       });
     };

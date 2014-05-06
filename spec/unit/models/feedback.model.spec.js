@@ -9,13 +9,13 @@ describe ('minerva.models', function () {
   describe('Feedback', function () {
 
     it ('fetches all feedbacks of a', function () {
-      var feedback = new Feedback()
+      var feedback = new Feedback({})
 
-      feedback.composedBy('usernameA')
-              .receivedBy(['usernameB', 'usernameC'])
-              .withTags(['lol'])
-              .ofType(['shout', 'achievement'])
-              .find() // .findOne()
+      // feedback.composedBy('usernameA')
+      //         .receivedBy(['usernameB', 'usernameC'])
+      //         .withTags(['lol'])
+      //         .ofType(['shout', 'achievement'])
+      //         .find() // .findOne()
     })
   })
 })

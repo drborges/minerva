@@ -5,13 +5,13 @@ var path = require('path')
   , connectLivereload = require('connect-livereload')
   , express = require('express')
 
-var app = require('./app')
-  , Indexer = require('./gulps/indexer')
+var Indexer = require('./gulps/indexer')
 
 var gulp = require('gulp')
   , plumber = require('gulp-plumber')
   , watch = require('gulp-watch')
   , reload = require('gulp-livereload')
+  , nodemon = require('gulp-nodemon')
   , shell = require('gulp-shell')
   , concat = require('gulp-concat')
   , autoConcat = require('gulp-continuous-concat')
@@ -47,7 +47,7 @@ var files = {
     ],
     server: [
       'app.js',
-      'api/**/*.js'
+      'api/*.js'
     ]
   },
   public: 'public/**/*',
@@ -73,9 +73,7 @@ gulp.task('default', [ 'server', 'livereload', 'auto.concat.app', 'auto.index' ]
 gulp.task('auto.concat', [ 'auto.concat.app', 'auto.concat.specs', 'auto.concat.templates' ])
 
 gulp.task('server', function () {
-  app.use(connectLivereload())
-  app.use(express.static(path.join(__dirname, 'public')))
-  app.listen(3000)
+  nodemon({ script: 'app.js', ext: 'js', ignore: [] })
 })
 
 gulp.task('livereload', function() {

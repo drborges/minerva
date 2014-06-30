@@ -8,8 +8,8 @@ exports.register = function (app) {
   });
 
   app.get('/api/v1/users/:userId/feedbacks', function (req, res) {
-    var client = elasticsearch.Client();
-    var userId = req.params.userId;
+    var client = elasticsearch.Client()
+      , userId = req.params.userId;
 
     client.search({ index: 'minerva', type: 'feedback', size: -1, body: {
       query: {
